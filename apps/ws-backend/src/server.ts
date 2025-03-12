@@ -1,6 +1,11 @@
-import app from "./app";
+import { WebSocketServer } from "ws";
 import { PORT } from "./config";
 
-app.listen(PORT, () => {
-  console.log(`WS server is running on http://localhost:${PORT}`);
+const wss = new WebSocketServer({ port: PORT });
+
+wss.on("connection", (ws) => {
+  ws.on("message", (message) => {
+    console.log(`Received message => ${message}`);
+    ws.send(`Received message => ${message}`);
+  });
 });

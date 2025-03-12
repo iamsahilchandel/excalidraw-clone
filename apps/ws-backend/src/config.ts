@@ -1,3 +1,3 @@
 import 'dotenv/config';
 
-export const PORT = process.env.HTTP_PORT || 3002;
+export const PORT: number = Number(process.env.HTTP_PORT) || 3002;
