@@ -1,7 +1,13 @@
 {
   "name": "@repo/db",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "index.ts",
+  "exports": {
+    ".": {
+      "import": "./src/index.ts",
+      "require": "./dist/index.js"
+    }
+  },
   "scripts": {
     "prisma:pull": "prisma db pull",
     "prisma:push": "prisma db push",
