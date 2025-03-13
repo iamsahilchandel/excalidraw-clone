@@ -2,14 +2,8 @@
   "name": "@repo/backend-common",
   "version": "1.0.0",
   "exports": {
-    "./config": {
-      "import": "./src/config.ts",
-      "require": "./dist/config.js"
-    },
-    "./zod": {
-      "import": "./src/zod.ts",
-      "require": "./dist/zod.js"
-    }
+    "./config": "./src/config.ts",
+    "./zod": "./src/zod.ts"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
