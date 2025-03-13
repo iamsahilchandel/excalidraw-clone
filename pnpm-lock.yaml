@@ -135,18 +135,40 @@ importers:
         specifier: ^4.3.5
         version: 4.9.5
 
+  packages/backend-common:
+    dependencies:
+      dotenv:
+        specifier: ^16.4.7
+        version: 16.4.7
+      zod:
+        specifier: ^3.24.2
+        version: 3.24.2
+    devDependencies:
+      '@repo/typescript-config':
+        specifier: workspace:*
+        version: link:../typescript-config
+      '@types/node':
+        specifier: ^22.13.9
+        version: 22.13.10
+      typescript:
+        specifier: ^5.8.2
+        version: 5.8.2
+
   packages/db:
     dependencies:
       '@prisma/client':
         specifier: ^6.5.0
-        version: 6.5.0(prisma@6.5.0(typescript@4.9.5))(typescript@4.9.5)
+        version: 6.5.0(prisma@6.5.0(typescript@5.8.2))(typescript@5.8.2)
     devDependencies:
       '@repo/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
       prisma:
         specifier: ^6.5.0
-        version: 6.5.0(typescript@4.9.5)
+        version: 6.5.0(typescript@5.8.2)
+      typescript:
+        specifier: ^5.8.2
+        version: 5.8.2
 
   packages/eslint-config:
     devDependencies:
@@ -2696,6 +2718,9 @@ packages:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
 
+  zod@3.24.2:
+    resolution: {integrity: sha512-lY7CDW43ECgW9u1TcT3IoXHflywfVqDYze4waEz812jR/bZ8FHDsl7pFQoSZTz5N+2NqRXs8GBwnAwo3ZNxqhQ==}
+
 snapshots:
 
   '@babel/runtime-corejs3@7.26.10':
@@ -2970,10 +2995,10 @@ snapshots:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.19.1
 
-  '@prisma/client@6.5.0(prisma@6.5.0(typescript@4.9.5))(typescript@4.9.5)':
+  '@prisma/client@6.5.0(prisma@6.5.0(typescript@5.8.2))(typescript@5.8.2)':
     optionalDependencies:
-      prisma: 6.5.0(typescript@4.9.5)
-      typescript: 4.9.5
+      prisma: 6.5.0(typescript@5.8.2)
+      typescript: 5.8.2
 
   '@prisma/config@6.5.0':
     dependencies:
@@ -4822,13 +4847,13 @@ snapshots:
 
   prettier@3.5.3: {}
 
-  prisma@6.5.0(typescript@4.9.5):
+  prisma@6.5.0(typescript@5.8.2):
     dependencies:
       '@prisma/config': 6.5.0
       '@prisma/engines': 6.5.0
     optionalDependencies:
       fsevents: 2.3.3
-      typescript: 4.9.5
+      typescript: 5.8.2
     transitivePeerDependencies:
       - supports-color
 
@@ -5511,3 +5536,5 @@ snapshots:
   yn@3.1.1: {}
 
   yocto-queue@0.1.0: {}
+
+  zod@3.24.2: {}
