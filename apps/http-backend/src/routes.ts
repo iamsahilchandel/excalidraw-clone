@@ -16,8 +16,10 @@ router.post("/login", (req: Request, res: Response) => {
 
 router.post("/register", (req: Request, res: Response) => {
   const { success, data, error } = UserSchema.safeParse(req.body);
+  
   if (!success) {
-    return res.status(400).json({ error: error.message });
+    res.status(400).json({ error: error.message });
+    return;
   }
 
   const { name, email, password } = data;
