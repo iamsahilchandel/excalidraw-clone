@@ -7,28 +7,32 @@ import { JWT_SECRET } from "../config";
 
 export const login = async (req: Request, res: Response) => {
   try {
-    const { success, data, error } = SigninSchema.safeParse(req.body.data);
+    const { success, data, error } = SigninSchema.safeParse(req.body);
 
     if (!success) {
-      res.status(403).json({ message: "invaild inputs", error: error.message });
+      res
+        .status(403)
+        .json({ message: "invaild inputs", error: JSON.parse(error.message) });
       return;
     }
 
     const { email, password } = data;
 
-    const user = await prisma.user.findOne({ email });
+    const user = await prisma.user.findFirst({ where: { email } });
 
     if (!user) {
-      console.info("[404] Email not found during login");
-      res.status(404).json({ message: "either wrong email or password!" });
+      res.status(401).json({ message: "either wrong email or password!" });
       return;
     }
 
-    if (await bcrypt.compare(password, user.password)) {
-      res.status(401).json({ success: false, message: "Invalid credentials" });
+    const authorized = await bcrypt.compare(password, user.password);
+
+    if (!authorized) {
+      res
+        .status(401)
+        .json({ message: "Either your email or password is incorrect." });
       return;
     }
-
     const token = jwt.sign({ userId: user.id, email: email }, JWT_SECRET!);
 
     res.json({ token });
@@ -57,7 +61,7 @@ export const register = async (req: Request, res: Response) => {
       return;
     }
 
-    const exiting_user = await prisma.user.findOne({ email });
+    const exiting_user = await prisma.user.findFirst({ where: { email } });
 
     if (exiting_user) {
       res.status(403).json({ message: "You already have an account!" });

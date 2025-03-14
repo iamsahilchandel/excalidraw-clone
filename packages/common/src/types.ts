@@ -23,3 +23,11 @@ export const CreateRoomSchema = z.object({
 });
 
 export type CreateRoom = z.infer<typeof CreateRoomSchema>;
+
+export const ChatSchema = z.object({
+  roomId: z.string(),
+  userId: z.string(),
+  message: z.string(),
+});
+
+export type Chat = z.infer<typeof ChatSchema>;
