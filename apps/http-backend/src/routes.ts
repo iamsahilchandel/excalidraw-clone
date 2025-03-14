@@ -1,34 +1,13 @@
 import express, { Request, Response, Router } from "express";
 import { middleware } from "./middleware";
-import { JWT_SECRET } from "./config";
-import jwt from "jsonwebtoken";
-import { UserSchema } from "@repo/common/types";
+import * as auth from "./controllers/auth.controller";
+import * as room from "./controllers/room.controller"
 
 const router: Router = express.Router();
 
-router.post("/login", (req: Request, res: Response) => {
-  const userId = 1;
+router.post("/login", auth.login);
+router.post("/register", auth.register);
 
-  const token = jwt.sign({ userId }, JWT_SECRET!);
-
-  res.json({ token });
-});
-
-router.post("/register", (req: Request, res: Response) => {
-  const { success, data, error } = UserSchema.safeParse(req.body);
-  
-  if (!success) {
-    res.status(400).json({ error: error.message });
-    return;
-  }
-
-  const { name, email, password } = data;
-
-  res.json({ message: "User registered successfully" });
-});
-
-router.post("/room", middleware, (req: Request, res: Response) => {
-  res.json({ roomId: "1234" });
-});
+router.post("/room", middleware, room.create);
 
 export default router;
